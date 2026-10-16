@@ -5,8 +5,8 @@
 - [x] Android emulator on D:, VS Code tasks to start it and run the app
 
 ## Data
-- [ ] daily pool: build script + pool.json (Art Institute of Chicago, Cleveland Museum of Art, Wikipedia titles)
-- [ ] pick the day's artwork by local date
+- [x] daily pool: build script + pool.json (Art Institute of Chicago, Cleveland Museum of Art, Wikipedia titles)
+- [x] pick the day's artwork by local date
 - [ ] Art Institute of Chicago record -> artwork
 - [ ] Cleveland Museum of Art record -> artwork
 - [ ] Wikipedia article -> story, materials, critics
