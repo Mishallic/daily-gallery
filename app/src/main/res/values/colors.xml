@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#1B1916</color>
+    <!-- Matches the Compose background, so the launch window doesn't flash a different colour. -->
+    <color name="window_background">#F6F1E8</color>
+</resources>
