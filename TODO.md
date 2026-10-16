@@ -13,9 +13,9 @@
 - [x] repository: assemble the day's artwork, cache each day, work offline
 
 ## UI
-- [ ] today: image, title, artist, facts
-- [ ] sections: story, materials and technique, through history, critics, sources
-- [ ] loading / error / offline states
+- [x] today: image, title, artist, facts
+- [x] sections: story, materials and technique, through history, critics, sources
+- [x] loading / error / offline states
 - [ ] full-screen image with pinch zoom
 - [ ] gallery: past days and saved artworks
 

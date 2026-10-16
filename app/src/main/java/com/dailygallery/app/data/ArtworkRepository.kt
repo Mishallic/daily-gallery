@@ -5,8 +5,11 @@ import com.dailygallery.app.domain.Day
 import com.dailygallery.app.domain.Pool
 import com.dailygallery.app.domain.PoolEntry
 import com.dailygallery.app.domain.Source
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 
 /**
@@ -21,6 +24,7 @@ class ArtworkRepository(
     private val wikipedia: WikipediaSource,
     private val cache: ArtworkCache,
     private val clock: () -> LocalDate = { LocalDate.now() },
+    private val io: CoroutineDispatcher = Dispatchers.IO,
 ) {
     fun today(): Day = clock().let { day -> Day(day, pool.entryFor(day)) }
 
@@ -32,10 +36,10 @@ class ArtworkRepository(
      * When they can't be reached, an incomplete cached copy is better than nothing.
      * [refresh] reads the sources even when the copy is complete.
      */
-    suspend fun artwork(entry: PoolEntry, refresh: Boolean = false): Artwork {
+    suspend fun artwork(entry: PoolEntry, refresh: Boolean = false): Artwork = withContext(io) {
         val cached = cache.read(entry.key)
-        if (cached != null && !cached.incomplete && !refresh) return cached
-        return try {
+        if (cached != null && !cached.incomplete && !refresh) return@withContext cached
+        try {
             fetch(entry).also { cache.write(entry.key, it) }
         } catch (failure: FetchException) {
             cached ?: throw failure
