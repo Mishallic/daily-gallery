@@ -17,7 +17,7 @@
 - [x] sections: story, materials and technique, through history, critics, sources
 - [x] loading / error / offline states
 - [x] full-screen image with pinch zoom
-- [ ] gallery: past days and saved artworks
+- [x] gallery: past days and saved artworks
 
 ## Ship
 - [ ] screenshot tests: render each screen to a PNG on the PC

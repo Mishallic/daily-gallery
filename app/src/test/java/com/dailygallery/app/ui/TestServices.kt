@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import coil3.ImageLoader
 import coil3.SingletonImageLoader
+import coil3.annotation.DelicateCoilApi
 import coil3.annotation.ExperimentalCoilApi
 import coil3.asImage
 import coil3.test.FakeImage
@@ -62,7 +63,7 @@ class TestServices {
     fun graph(context: Context, today: LocalDate = start) = AppGraph(context, http, clock = { today }, pool = pool)
 
     /** Coil answers with the saved images (any size of the same picture); anything else is grey. */
-    @OptIn(ExperimentalCoilApi::class)
+    @OptIn(ExperimentalCoilApi::class, DelicateCoilApi::class)
     fun useSavedImages(context: Context) {
         val engine = FakeImageLoaderEngine.Builder()
             .intercept({ "2d484387" in it.toString() }, image("aic-27992.jpg"))

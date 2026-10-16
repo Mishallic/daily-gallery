@@ -86,9 +86,11 @@ private val GalleryTypography = Typography().run {
         titleLarge = titleLarge.copy(fontFamily = Playfair, fontWeight = FontWeight.Medium),
         bodyLarge = TextStyle(fontSize = 17.sp, lineHeight = 28.sp, letterSpacing = 0.1.sp),
         bodyMedium = bodyMedium.copy(fontSize = 15.sp, lineHeight = 22.sp),
-        labelMedium = labelMedium.copy(letterSpacing = 0.12.em),
     )
 }
+
+/** Small capitals-style line above a title ("TODAY · FRIDAY 16 OCTOBER"). */
+val Typography.overline: TextStyle get() = labelMedium.copy(letterSpacing = 0.12.em)
 
 @Composable
 fun DailyGalleryTheme(dark: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {

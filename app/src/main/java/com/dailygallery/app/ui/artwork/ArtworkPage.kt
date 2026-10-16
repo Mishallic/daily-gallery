@@ -59,6 +59,7 @@ import coil3.compose.AsyncImage
 import com.dailygallery.app.domain.ArtImage
 import com.dailygallery.app.domain.Artwork
 import com.dailygallery.app.domain.PoolEntry
+import com.dailygallery.app.ui.theme.overline
 import kotlinx.coroutines.launch
 
 /** Items above the sections in the list: the picture, its label, the actions, the section bar. */
@@ -132,7 +133,9 @@ private fun Picture(
     val ratio = image?.let { if ((it.width ?: 0) > 0 && (it.height ?: 0) > 0) it.width!!.toFloat() / it.height!! else null }
     Box(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceContainer)) {
         Box(
-            Modifier.fillMaxWidth().statusBarsPadding().padding(horizontal = 24.dp, vertical = 32.dp),
+            // With a back button, the picture hangs lower so the button sits on the wall above it.
+            Modifier.fillMaxWidth().statusBarsPadding()
+                .padding(start = 24.dp, end = 24.dp, top = if (navigationIcon != null) 64.dp else 32.dp, bottom = 32.dp),
             contentAlignment = Alignment.Center,
         ) {
             val frame = if (ratio != null) {
@@ -160,7 +163,7 @@ private fun Picture(
 private fun ArtworkLabel(entry: PoolEntry, artwork: Artwork?, overline: String) {
     val colors = MaterialTheme.colorScheme
     Column(Modifier.padding(start = 24.dp, end = 24.dp, top = 28.dp)) {
-        Text(overline.uppercase(), style = MaterialTheme.typography.labelMedium, color = colors.primary)
+        Text(overline.uppercase(), style = MaterialTheme.typography.overline, color = colors.primary)
         Spacer(Modifier.height(10.dp))
         Text(artwork?.title ?: entry.title, style = MaterialTheme.typography.headlineMedium)
         artwork?.facts?.firstOrNull { it.label == "Original title" }?.let {
