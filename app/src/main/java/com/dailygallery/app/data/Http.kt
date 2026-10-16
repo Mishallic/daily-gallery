@@ -22,15 +22,21 @@ internal val sourceJson = Json {
     coerceInputValues = true
 }
 
-/** Runs [block], turning a failed read or an unreadable answer into null. Cancellation still cancels. */
-internal suspend fun <T> optional(block: suspend () -> T): T? = try {
-    block()
+/**
+ * Runs [block], catching a failed read or an unreadable answer as a failure. Cancellation still
+ * cancels, and anything else (a bug) still throws.
+ */
+internal suspend fun <T> attempt(block: suspend () -> T): Result<T> = try {
+    Result.success(block())
 } catch (cancelled: CancellationException) {
     throw cancelled
-} catch (_: FetchException) {
-    null
-} catch (_: SerializationException) {
-    null
-} catch (_: IllegalArgumentException) {
-    null
+} catch (failure: FetchException) {
+    Result.failure(failure)
+} catch (failure: SerializationException) {
+    Result.failure(failure)
+} catch (failure: IllegalArgumentException) {
+    Result.failure(failure)
 }
+
+/** [attempt], when only success matters. */
+internal suspend fun <T> optional(block: suspend () -> T): T? = attempt(block).getOrNull()
