@@ -32,7 +32,7 @@ class TodayScreenTest {
     private fun showToday(dark: Boolean = false) {
         services.useSavedImages(compose.activity)
         val graph = services.graph(compose.activity)
-        compose.setContent { DailyGalleryTheme(dark = dark) { Surface { TodayScreen(graph, onOpenImage = {}) } } }
+        compose.setContent { DailyGalleryTheme(dark = dark) { Surface { TodayScreen(graph, onOpenImage = { _, _ -> }) } } }
     }
 
     private fun waitFor(text: String) = compose.waitUntil(10_000) {

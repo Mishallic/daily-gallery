@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter
 
 /** Today's artwork. Coming back to the app after midnight shows the new day's. */
 @Composable
-fun TodayScreen(graph: AppGraph, onOpenImage: (ArtImage) -> Unit, modifier: Modifier = Modifier) {
+fun TodayScreen(graph: AppGraph, onOpenImage: (image: ArtImage, caption: String) -> Unit, modifier: Modifier = Modifier) {
     var today by remember { mutableStateOf(graph.repository.today()) }
     LifecycleResumeEffect(Unit) {
         today = graph.repository.today()
@@ -36,7 +36,7 @@ fun EntryPage(
     graph: AppGraph,
     entry: PoolEntry,
     overline: String,
-    onOpenImage: (ArtImage) -> Unit,
+    onOpenImage: (image: ArtImage, caption: String) -> Unit,
     modifier: Modifier = Modifier,
     navigationIcon: (@Composable () -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},

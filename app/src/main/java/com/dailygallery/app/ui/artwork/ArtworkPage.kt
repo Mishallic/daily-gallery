@@ -76,7 +76,7 @@ fun ArtworkPage(
     state: ArtworkState,
     overline: String,
     onRetry: () -> Unit,
-    onOpenImage: (ArtImage) -> Unit,
+    onOpenImage: (image: ArtImage, caption: String) -> Unit,
     modifier: Modifier = Modifier,
     navigationIcon: (@Composable () -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
@@ -122,7 +122,12 @@ fun ArtworkPage(
 
 /** The artwork on a wall: the full image once the record is read, the schedule's thumbnail until then. */
 @Composable
-private fun Picture(entry: PoolEntry, artwork: Artwork?, onOpenImage: (ArtImage) -> Unit, navigationIcon: (@Composable () -> Unit)?) {
+private fun Picture(
+    entry: PoolEntry,
+    artwork: Artwork?,
+    onOpenImage: (image: ArtImage, caption: String) -> Unit,
+    navigationIcon: (@Composable () -> Unit)?,
+) {
     val image = artwork?.image
     val ratio = image?.let { if ((it.width ?: 0) > 0 && (it.height ?: 0) > 0) it.width!!.toFloat() / it.height!! else null }
     Box(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceContainer)) {
@@ -139,7 +144,9 @@ private fun Picture(entry: PoolEntry, artwork: Artwork?, onOpenImage: (ArtImage)
                 model = image?.url ?: entry.thumbnail,
                 contentDescription = image?.altText ?: "${entry.title}, by ${entry.artist}",
                 contentScale = ContentScale.Fit,
-                modifier = frame.clickable(enabled = image != null, onClickLabel = "View full screen") { image?.let(onOpenImage) },
+                modifier = frame.clickable(enabled = image != null, onClickLabel = "View full screen") {
+                    image?.let { onOpenImage(it, "${artwork.title}, ${artwork.artist}") }
+                },
             )
         }
         if (navigationIcon != null) {

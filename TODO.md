@@ -16,7 +16,7 @@
 - [x] today: image, title, artist, facts
 - [x] sections: story, materials and technique, through history, critics, sources
 - [x] loading / error / offline states
-- [ ] full-screen image with pinch zoom
+- [x] full-screen image with pinch zoom
 - [ ] gallery: past days and saved artworks
 
 ## Ship
