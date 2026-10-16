@@ -20,7 +20,7 @@
 - [x] gallery: past days and saved artworks
 
 ## Ship
-- [ ] screenshot tests: render each screen to a PNG on the PC
+- [x] screen previews: render each screen to a PNG on the PC
 - [ ] CI
 - [ ] README with screenshots
 - [ ] release 1.0 APK

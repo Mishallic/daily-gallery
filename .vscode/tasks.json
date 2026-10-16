@@ -29,6 +29,14 @@
             "problemMatcher": []
         },
         {
+            "label": "Screen previews",
+            "detail": "Draw every screen to a PNG in app/build/screenshots, on the PC; no emulator needed",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/dev.ps1", "screens"],
+            "problemMatcher": []
+        },
+        {
             "label": "Emulator screenshot",
             "detail": "Save the emulator's screen to build/emulator.png",
             "type": "process",

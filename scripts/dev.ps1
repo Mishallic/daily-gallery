@@ -8,6 +8,7 @@
     start       Boot the emulator, if it isn't running, and wait until Android is ready.
     run         Build the app, install it on the emulator and open it. Starts the emulator first.
     test        Run the unit and Robolectric UI tests on the PC (no emulator needed).
+    screens     Render every screen to a PNG in app\build\screenshots, on the PC (no emulator needed).
     screenshot  Save the emulator's screen to build\emulator.png.
 
     The build SDK (and adb) comes from local.properties. The emulator has an SDK root of its own,
@@ -19,7 +20,7 @@
 #>
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('setup', 'start', 'run', 'test', 'screenshot')]
+    [ValidateSet('setup', 'start', 'run', 'test', 'screens', 'screenshot')]
     [string]$Command
 )
 
@@ -161,6 +162,11 @@ switch ($Command) {
         Write-Host 'Daily Gallery is open on the emulator.'
     }
     'test' { Invoke-Gradle @('testDebugUnitTest') }
+    'screens' {
+        # The UI tests draw each screen on saved responses and real images; --rerun redraws them all.
+        Invoke-Gradle @('testDebugUnitTest', '--tests', 'com.dailygallery.app.ui.*', '--rerun')
+        Write-Host "Screens drawn in $(Join-Path $Root 'app\build\screenshots')"
+    }
     'screenshot' {
         if (-not (Test-EmulatorRunning)) { throw 'The emulator is not running.' }
         $out = Join-Path $Root 'build\emulator.png'

@@ -28,6 +28,7 @@ point at the SDK: `sdk.dir=C\:\\path\\to\\Android\\Sdk`.
 | **Run on emulator** (Ctrl+Shift+B) | Builds, installs and opens the app; starts the emulator first if needed. |
 | **Start emulator** | Boots the emulator. |
 | **Tests** | Unit and Robolectric UI tests on the PC. |
+| **Screen previews** | Draws every screen to a PNG in `app/build/screenshots`, on the PC with no emulator; open them in VS Code. |
 | **Emulator screenshot** | Saves the emulator's screen to `build/emulator.png`. |
 
 The emulator needs hardware acceleration. On Windows, turn it on once, from PowerShell as
