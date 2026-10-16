@@ -78,6 +78,14 @@ class TextTest {
     }
 
     @Test
+    fun anOwnersYearIsTheLastOneOutsideBrackets() {
+        assertEquals(1891, ownerYear("By descent to Mme. Seurat, the artist’s mother (died 1899), Paris, 1891"))
+        assertEquals(1924, ownerYear("Sold for $20,000 [1917 price] to Frederic Clay Bartlett, Chicago, 1924"))
+        assertEquals(1899, ownerYear("Lucie Brû (died 1899)")) // only a year in brackets: better than none
+        assertNull(ownerYear("Lucie Brû Cousturier and Edmond Cousturier, Paris"))
+    }
+
+    @Test
     fun eventsSortOldestFirstWithUndatedOnesLast() {
         val events = listOf(Event(2004, Paragraph("b")), Event(null, Paragraph("u")), Event(1922, Paragraph("a")))
         assertEquals(listOf("a", "b", "u"), events.chronological().map { it.text.text })

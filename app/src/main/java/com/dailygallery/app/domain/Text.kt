@@ -117,5 +117,23 @@ fun splitOutsideBrackets(text: String, separator: Char = ';'): List<String> {
 /** The first year (1200-2099) in a line of history; house numbers and catalogue numbers are too short. */
 fun firstYear(text: String): Int? = year.find(text)?.value?.toInt()
 
+/**
+ * The year an owner acquired a work: the last year outside brackets ("..., the artist's mother
+ * (died 1899), Paris, 1891" is 1891), or failing that the last year at all.
+ */
+fun ownerYear(text: String): Int? {
+    val outside = StringBuilder()
+    var depth = 0
+    for (ch in text) {
+        when (ch) {
+            '(', '[' -> depth++
+            ')', ']' -> if (depth > 0) depth--
+            else -> outside.append(if (depth == 0) ch else ' ')
+        }
+    }
+    val last = year.findAll(outside).lastOrNull() ?: year.findAll(text).lastOrNull()
+    return last?.value?.toInt()
+}
+
 /** Events oldest first; undated ones keep their place at the end. */
 fun List<Event>.chronological(): List<Event> = sortedBy { it.year ?: Int.MAX_VALUE }
