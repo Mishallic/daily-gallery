@@ -21,7 +21,7 @@
 
 ## Ship
 - [x] screen previews: render each screen to a PNG on the PC
-- [ ] CI
+- [x] CI
 - [ ] README with screenshots
 - [ ] release 1.0 APK
 

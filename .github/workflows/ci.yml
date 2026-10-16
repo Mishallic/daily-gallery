@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  app:
+    name: App (lint, tests, build)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v4
+      # The runner's Android SDK comes from ANDROID_HOME; local.properties is only for this PC.
+      - run: ./gradlew --console=plain lintDebug
+      # Unit and Robolectric UI tests on saved responses; the live-sources check stays off.
+      - run: ./gradlew --console=plain testDebugUnitTest
+      - run: ./gradlew --console=plain assembleDebug
+      - name: Screens drawn by the UI tests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screens
+          path: app/build/screenshots
+          if-no-files-found: ignore
+      - name: Test report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: app/build/reports/tests
