@@ -6,6 +6,7 @@ import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThrows
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /** The real OkHttp client against a local server. */
@@ -23,6 +24,7 @@ class OkHttpGetTest {
         val request = server.takeRequest()
         assertEquals(OkHttpGet.USER_AGENT, request.getHeader("User-Agent"))
         assertEquals(OkHttpGet.USER_AGENT, request.getHeader("AIC-User-Agent"))
+        assertTrue(OkHttpGet.USER_AGENT.endsWith(" okhttp/4.12.0")) // or the Art Institute's images answer 403
     }
 
     @Test

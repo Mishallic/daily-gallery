@@ -3,6 +3,7 @@ package com.dailygallery.app.data
 import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.Call
 import okhttp3.Callback
+import okhttp3.OkHttp
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -42,7 +43,9 @@ class OkHttpGet(private val client: OkHttpClient = defaultClient()) : HttpGet {
     }
 
     companion object {
-        const val USER_AGENT = "DailyGallery/1.0 (Android; https://github.com/Mishallic)"
+        // The Art Institute's image server sits behind a Cloudflare check that lets OkHttp clients
+        // through and challenges other agents (HTTP 403), so the name keeps OkHttp's token.
+        const val USER_AGENT = "DailyGallery/1.0 (Android; https://github.com/Mishallic) okhttp/${OkHttp.VERSION}"
 
         fun defaultClient(): OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(15, TimeUnit.SECONDS)
