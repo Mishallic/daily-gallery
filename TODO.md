@@ -2,7 +2,7 @@
 
 ## Setup
 - [x] scaffold the app on Job Watch's toolchain, gallery theme, launcher icon
-- [ ] Android emulator on D:, VS Code tasks to start it and run the app
+- [x] Android emulator on D:, VS Code tasks to start it and run the app
 
 ## Data
 - [ ] daily pool: build script + pool.json (Art Institute of Chicago, Cleveland Museum of Art, Wikipedia titles)

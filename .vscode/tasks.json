@@ -1,0 +1,48 @@
+{
+    // Terminal > Run Task, or Ctrl+Shift+B for "Run on emulator".
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run on emulator",
+            "detail": "Build, install and open the app; starts the emulator if it isn't running",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/dev.ps1", "run"],
+            "group": { "kind": "build", "isDefault": true },
+            "problemMatcher": []
+        },
+        {
+            "label": "Start emulator",
+            "detail": "Boot the Pixel 7 (Android 15) emulator",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/dev.ps1", "start"],
+            "problemMatcher": []
+        },
+        {
+            "label": "Tests",
+            "detail": "Unit and Robolectric UI tests on the PC; no emulator needed",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/dev.ps1", "test"],
+            "group": { "kind": "test", "isDefault": true },
+            "problemMatcher": []
+        },
+        {
+            "label": "Emulator screenshot",
+            "detail": "Save the emulator's screen to build/emulator.png",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/dev.ps1", "screenshot"],
+            "problemMatcher": []
+        },
+        {
+            "label": "Set up emulator",
+            "detail": "Once: download the emulator and Android 15 image to D:\\android and create the device",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/dev.ps1", "setup"],
+            "problemMatcher": []
+        }
+    ]
+}
