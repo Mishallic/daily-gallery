@@ -8,7 +8,7 @@
 - [x] daily pool: build script + pool.json (Art Institute of Chicago, Cleveland Museum of Art, Wikipedia titles)
 - [x] pick the day's artwork by local date
 - [x] Art Institute of Chicago record -> artwork
-- [ ] Cleveland Museum of Art record -> artwork
+- [x] Cleveland Museum of Art record -> artwork
 - [ ] Wikipedia article -> story, materials, critics
 - [ ] repository: assemble the day's artwork, cache each day, work offline
 
