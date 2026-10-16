@@ -23,7 +23,7 @@
 - [x] screen previews: render each screen to a PNG on the PC
 - [x] CI
 - [x] README with screenshots
-- [ ] release 1.0 APK
+- [x] release 1.0 APK
 
 ## Later
 - [ ] morning notification with the day's artwork
