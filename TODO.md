@@ -9,7 +9,7 @@
 - [x] pick the day's artwork by local date
 - [x] Art Institute of Chicago record -> artwork
 - [x] Cleveland Museum of Art record -> artwork
-- [ ] Wikipedia article -> story, materials, critics
+- [x] Wikipedia article -> story, materials, critics
 - [ ] repository: assemble the day's artwork, cache each day, work offline
 
 ## UI
